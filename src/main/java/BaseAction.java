@@ -1,9 +1,11 @@
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import utils.Registry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,8 +13,7 @@ import java.util.List;
 
 public abstract class BaseAction extends AnAction {
 
-    //TODO: move to settings
-    private static final String GIT_EXTENSIONS_EXE = "C:\\Program Files (x86)\\GitExtensions\\GitExtensions.exe";
+    private static final String ERROR_MESSAGE = "This plugin requires Git Extensions to be installed. This application can be downloaded from http://gitextensions.github.io/";
 
     private String command;
 
@@ -27,7 +28,11 @@ public abstract class BaseAction extends AnAction {
             String fileName = getFileName(file);
 
             if (fileName != null) {
-                List<String> args = new ArrayList<>(Arrays.asList(GIT_EXTENSIONS_EXE, command, fileName));
+                String path = findGitExtensionsExe();
+                if (path == null) {
+                    Messages.showMessageDialog(ERROR_MESSAGE, "Error", Messages.getErrorIcon());
+                }
+                List<String> args = new ArrayList<>(Arrays.asList(path, command, fileName));
                 String additionalArgs = getAdditionalParameters(e);
                 if (additionalArgs != null) {
                     args.add(additionalArgs);
@@ -48,6 +53,18 @@ public abstract class BaseAction extends AnAction {
     @Nullable
     protected String getAdditionalParameters(AnActionEvent e) {
         return null;
+    }
+
+    @Nullable
+    private String findGitExtensionsExe() {
+        String installDir = Registry.read("HKEY_CURRENT_USER\\Software\\GitExtensions", "InstallDir");
+        if (installDir == null) {
+            installDir = Registry.read("HKEY_USERS\\Software\\GitExtensions", "InstallDir");
+        }
+        if (installDir == null) {
+            return null;
+        }
+        return installDir + "\\GitExtensions.exe";
     }
 
 }
