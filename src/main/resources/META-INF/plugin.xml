@@ -1,0 +1,75 @@
+<idea-plugin>
+    <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
+    <name>GitExtensions</name>
+    <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
+    <version>0.1.0</version>
+
+    <description><![CDATA[
+    Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from the IDE
+    ]]></description>
+
+    <change-notes><![CDATA[
+      <p>
+        <ul>
+          <li>0.1.0</li>
+          <ul>
+            <li>Support for commands via IDE main menu and editor/project window context menu</li>
+            <li>Only default installation path (C:\Program Files (x86)\GitExtensions\GitExtensions.exe) is supported</li>
+          </ul>
+        </ul>
+      </p>
+      ]]>
+    </change-notes>
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <group id="GitExtensions.ContextMenu" popup="false">
+            <separator/>
+            <action id="GitExtensions.OpenWithDiffTool" class="OpenWithDiffTool" text="GitExt : Diff" icon="/icons/Diff.png"/>
+            <action id="GitExtensions.FileHistory" class="FileHistory" text="File History" icon="/icons/FileHistory.png"/>
+            <action id="GitExtensions.Revert" class="Revert" text="Reset File Changes" icon="/icons/ResetWorkingDirChanges.png"/>
+            <separator/>
+            <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+        </group>
+
+        <group id="GitExtensions.MainMenu" text="GitExt">
+            <action id="GitExtensions.Browse" class="Browse" text="Browse" icon="/icons/BrowseFileExplorer.png"/>
+            <action id="GitExtensions.Clone" class="Clone" text="Clone Repository" icon="/icons/CloneRepoGit.png"/>
+            <action id="GitExtensions.Init" class="Init" text="Create New Repository" icon="/icons/star.png"/>
+            <separator/>
+            <action id="GitExtensions.Commit" class="Commit" text="Commit" icon="/icons/RepoStateClean.png"/>
+            <action id="GitExtensions.Pull" class="Pull" text="Pull" icon="/icons/Pull.png"/>
+            <action id="GitExtensions.Push" class="Push" text="Push" icon="/icons/Push.png"/>
+            <action id="GitExtensions.Stash" class="Stash" text="Stash" icon="/icons/stash.png"/>
+            <reference ref="GitExtensions.Revert"/>
+            <action id="GitExtensions.ManageRemotes" class="ManageRemotes" text="Manage Remotes" icon="/icons/Remotes.png"/>
+            <action id="GitExtensions.EditGitIgnore" class="EditGitIgnore" text="Edit .gitignore" icon="/icons/EditGitIgnore.png"/>
+            <separator/>
+            <action id="GitExtensions.ApplyPatch" class="ApplyPatch" text="Apply Patch" icon="/icons/PatchApply.png"/>
+            <action id="GitExtensions.FormatPatch" class="FormatPatch" text="Format Patch" icon="/icons/PatchFormat.png"/>
+            <separator/>
+            <reference ref="GitExtensions.FileHistory"/>
+            <action id="GitExtensions.ViewChanges" class="ViewChanges" text="View Changes" icon="/icons/Diff.png"/>
+            <action id="GitExtensions.Blame" class="Blame" text="Blame" icon="/icons/Blame.png"/>
+            <separator/>
+            <action id="GitExtensions.Checkout" class="Checkout" text="Checkout Branch" icon="/icons/checkout.png"/>
+            <action id="GitExtensions.Branch" class="Branch" text="Create Branch" icon="/icons/BranchCreate.png"/>
+            <action id="GitExtensions.Merge" class="Merge" text="Merge" icon="/icons/Merge.png"/>
+            <action id="GitExtensions.Rebase" class="Rebase" text="Rebase" icon="/icons/Rebase.png"/>
+            <action id="GitExtensions.SolveMergeConflicts" class="SolveMergeConflicts" text="Solve Merge Conflicts" icon="/icons/Conflict.png"/>
+            <action id="GitExtensions.CherryPick" class="CherryPick" text="Cherry Pick" icon="/icons/CherryPick.png"/>
+            <separator/>
+            <action id="GitExtensions.GitBash" class="GitBash" text="Git Bash" icon="/icons/GitForWindows.png"/>
+            <action id="GitExtensions.Settings" class="Settings" text="Settings" icon="/icons/Settings.png"/>
+            <action id="GitExtensions.About" class="About" text="About Git Extensions" icon="/icons/information.png"/>
+            <add-to-group group-id="MainMenu" anchor="after" relative-to-action="ViewMenu"/>
+        </group>
+    </actions>
+</idea-plugin>
