@@ -1,0 +1,1 @@
+# git-extensions-intellij
