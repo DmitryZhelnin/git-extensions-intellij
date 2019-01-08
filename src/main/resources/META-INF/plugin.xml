@@ -45,7 +45,6 @@
             <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
-            <add-to-group group-id="NavBarToolBar" anchor="last"/>
         </group>
 
         <group id="GitExtensions.MainMenu" text="GitExt">
