@@ -1,6 +1,10 @@
 <p>Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from the IDE</p>
 
 <p>
+  <h4>0.2.2</h4>
+  <ul>
+      <li>Added dark theme icons</li>
+  </ul>
   <h4>0.2.1</h4>
   <ul>
     <li>Added GitExtensions ToolBar to MainToolBar and NavigationToolBar</li>
