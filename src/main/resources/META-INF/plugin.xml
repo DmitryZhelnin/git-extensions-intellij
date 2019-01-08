@@ -2,7 +2,7 @@
     <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
     <name>GitExtensions</name>
     <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
 
     <description><![CDATA[
     Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from the IDE
@@ -11,6 +11,10 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+          <li>0.2.1</li>
+          <ul>
+            <li>Added GitExtensions ToolBar to MainToolBar and NavigationToolBar</li>
+          </ul>
           <li>0.2.0</li>
           <ul>
             <li>Support for any installation path of GitExtensions</li>
@@ -41,6 +45,7 @@
             <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+            <add-to-group group-id="NavBarToolBar" anchor="last"/>
         </group>
 
         <group id="GitExtensions.MainMenu" text="GitExt">
@@ -74,6 +79,19 @@
             <action id="GitExtensions.Settings" class="Settings" text="Settings" icon="/icons/Settings.png"/>
             <action id="GitExtensions.About" class="About" text="About Git Extensions" icon="/icons/information.png"/>
             <add-to-group group-id="MainMenu" anchor="after" relative-to-action="ViewMenu"/>
+        </group>
+
+        <group id="GitExtensions.Toolbar" popup="false">
+            <separator/>
+            <reference ref="GitExtensions.Commit"/>
+            <reference ref="GitExtensions.Browse"/>
+            <reference ref="GitExtensions.Pull"/>
+            <reference ref="GitExtensions.Push"/>
+            <reference ref="GitExtensions.Stash"/>
+            <reference ref="GitExtensions.Settings"/>
+            <separator/>
+            <add-to-group group-id="MainToolBar" anchor="last"/>
+            <add-to-group group-id="NavBarToolBar" anchor="last"/>
         </group>
     </actions>
 </idea-plugin>
