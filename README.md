@@ -19,3 +19,5 @@
     <li>Only default installation path (C:\Program Files (x86)\GitExtensions\GitExtensions.exe) is supported</li>
   </ul>
 </p>
+
+Original icons by [Yusuke Kamiyamane](http://p.yusukekamiyamane.com/) ([CCA/3.0](http://creativecommons.org/licenses/by/3.0/)).
