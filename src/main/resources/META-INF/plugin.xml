@@ -37,6 +37,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
+        <applicationService serviceImplementation="GitExtensionsService"/>
     </extensions>
 
     <actions>

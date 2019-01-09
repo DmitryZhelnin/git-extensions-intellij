@@ -5,7 +5,6 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import utils.Registry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +27,7 @@ public abstract class BaseAction extends AnAction {
             String fileName = getFileName(file);
 
             if (fileName != null) {
-                String path = findGitExtensionsExe();
+                String path = GitExtensionsService.getInstance().getInstallDir();
                 if (path == null) {
                     Messages.showMessageDialog(ERROR_MESSAGE, "Error", Messages.getErrorIcon());
                 }
@@ -53,18 +52,6 @@ public abstract class BaseAction extends AnAction {
     @Nullable
     protected String getAdditionalParameters(AnActionEvent e) {
         return null;
-    }
-
-    @Nullable
-    private String findGitExtensionsExe() {
-        String installDir = Registry.read("HKEY_CURRENT_USER\\Software\\GitExtensions", "InstallDir");
-        if (installDir == null) {
-            installDir = Registry.read("HKEY_USERS\\Software\\GitExtensions", "InstallDir");
-        }
-        if (installDir == null) {
-            return null;
-        }
-        return installDir + "\\GitExtensions.exe";
     }
 
 }
