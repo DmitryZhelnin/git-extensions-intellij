@@ -1,5 +1,6 @@
 package gitextensions.commands;
 
+import com.google.common.base.Strings;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -9,6 +10,7 @@ import gitextensions.GitExtensionsService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +33,13 @@ public abstract class BaseAction extends AnAction {
 
             if (fileName != null) {
                 String path = GitExtensionsService.getInstance().getExecutablePath();
-                if (path == null) {
+                if (Strings.isNullOrEmpty(path)) {
                     Messages.showMessageDialog(ERROR_MESSAGE, "Error", Messages.getErrorIcon());
+                    return;
+                }
+                if (!new File(path).isFile()) {
+                    Messages.showMessageDialog(String.format("File %s is not found", path), "Error", Messages.getErrorIcon());
+                    return;
                 }
                 List<String> args = new ArrayList<>(Arrays.asList(path, command, fileName));
                 String additionalArgs = getAdditionalParameters(e);
