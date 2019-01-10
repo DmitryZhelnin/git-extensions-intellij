@@ -27,7 +27,7 @@ public abstract class BaseAction extends AnAction {
             String fileName = getFileName(file);
 
             if (fileName != null) {
-                String path = GitExtensionsService.getInstance().getInstallDir();
+                String path = GitExtensionsService.getInstance().getExecutablePath();
                 if (path == null) {
                     Messages.showMessageDialog(ERROR_MESSAGE, "Error", Messages.getErrorIcon());
                 }

@@ -4,17 +4,17 @@ import utils.Registry;
 
 public class GitExtensionsService {
 
-    private String installDir;
+    private String executablePath;
 
     private GitExtensionsService() {
-        installDir = Registry.read("HKEY_CURRENT_USER\\Software\\GitExtensions", "InstallDir");
+        String installDir = Registry.read("HKEY_CURRENT_USER\\Software\\GitExtensions", "InstallDir");
         if (installDir == null) {
             installDir = Registry.read("HKEY_USERS\\Software\\GitExtensions", "InstallDir");
         }
         if (installDir == null) {
             return;
         }
-        installDir += "\\GitExtensions.exe";
+        executablePath = installDir + "\\GitExtensions.exe";
     }
 
     public static GitExtensionsService getInstance() {
@@ -22,7 +22,7 @@ public class GitExtensionsService {
     }
 
     @Nullable
-    public String getInstallDir() {
-        return installDir;
+    public String getExecutablePath() {
+        return executablePath;
     }
 }
