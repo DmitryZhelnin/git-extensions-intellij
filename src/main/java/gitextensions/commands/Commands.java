@@ -1,4 +1,6 @@
-abstract class Commands {
+package gitextensions.commands;
+
+public abstract class Commands {
     static final String ABOUT = "about";
     static final String SETTINGS = "settings";
     static final String GITBASH = "gitbash";

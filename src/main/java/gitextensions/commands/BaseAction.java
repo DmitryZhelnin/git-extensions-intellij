@@ -1,8 +1,11 @@
+package gitextensions.commands;
+
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
+import gitextensions.GitExtensionsService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,7 +19,7 @@ public abstract class BaseAction extends AnAction {
 
     private String command;
 
-    BaseAction(@NotNull String command) {
+    public BaseAction(@NotNull String command) {
         this.command = command;
     }
 

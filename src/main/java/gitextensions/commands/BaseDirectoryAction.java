@@ -1,10 +1,12 @@
+package gitextensions.commands;
+
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseDirectoryAction extends BaseAction {
 
-    BaseDirectoryAction(@NotNull String command) {
+    public BaseDirectoryAction(@NotNull String command) {
         super(command);
     }
 

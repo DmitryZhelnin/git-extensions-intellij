@@ -1,3 +1,5 @@
+package gitextensions.commands;
+
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.actionSystem.Presentation;
@@ -6,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseFileAction extends BaseAction {
 
-    BaseFileAction(@NotNull String command) {
+    public BaseFileAction(@NotNull String command) {
         super(command);
     }
 

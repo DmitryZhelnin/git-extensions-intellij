@@ -37,15 +37,15 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <applicationService serviceImplementation="GitExtensionsService"/>
+        <applicationService serviceImplementation="gitextensions.GitExtensionsService"/>
     </extensions>
 
     <actions>
         <group id="GitExtensions.ContextMenu" popup="false">
             <separator/>
-            <action id="GitExtensions.OpenWithDiffTool" class="OpenWithDiffTool" text="GitExt : Diff" icon="Icons.DIFF"/>
-            <action id="GitExtensions.FileHistory" class="FileHistory" text="File History" icon="Icons.FILE_HISTORY"/>
-            <action id="GitExtensions.Revert" class="Revert" text="Reset File Changes" icon="Icons.RESET"/>
+            <action id="GitExtensions.OpenWithDiffTool" class="gitextensions.commands.OpenWithDiffTool" text="GitExt : Diff" icon="Icons.DIFF"/>
+            <action id="GitExtensions.FileHistory" class="gitextensions.commands.FileHistory" text="File History" icon="Icons.FILE_HISTORY"/>
+            <action id="GitExtensions.Revert" class="gitextensions.commands.Revert" text="Reset File Changes" icon="Icons.RESET"/>
             <separator/>
             <add-to-group group-id="EditorTabPopupMenu" anchor="first"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
@@ -53,35 +53,35 @@
         </group>
 
         <group id="GitExtensions.MainMenu" text="GitExt">
-            <action id="GitExtensions.Browse" class="Browse" text="Browse" icon="Icons.BROWSE"/>
-            <action id="GitExtensions.Clone" class="Clone" text="Clone Repository" icon="Icons.CLONE"/>
-            <action id="GitExtensions.Init" class="Init" text="Create New Repository" icon="Icons.INIT"/>
+            <action id="GitExtensions.Browse" class="gitextensions.commands.Browse" text="Browse" icon="Icons.BROWSE"/>
+            <action id="GitExtensions.Clone" class="gitextensions.commands.Clone" text="Clone Repository" icon="Icons.CLONE"/>
+            <action id="GitExtensions.Init" class="gitextensions.commands.Init" text="Create New Repository" icon="Icons.INIT"/>
             <separator/>
-            <action id="GitExtensions.Commit" class="Commit" text="Commit" icon="Icons.COMMIT"/>
-            <action id="GitExtensions.Pull" class="Pull" text="Pull" icon="Icons.PULL"/>
-            <action id="GitExtensions.Push" class="Push" text="Push" icon="Icons.PUSH"/>
-            <action id="GitExtensions.Stash" class="Stash" text="Stash" icon="Icons.STASH"/>
+            <action id="GitExtensions.Commit" class="gitextensions.commands.Commit" text="Commit" icon="Icons.COMMIT"/>
+            <action id="GitExtensions.Pull" class="gitextensions.commands.Pull" text="Pull" icon="Icons.PULL"/>
+            <action id="GitExtensions.Push" class="gitextensions.commands.Push" text="Push" icon="Icons.PUSH"/>
+            <action id="GitExtensions.Stash" class="gitextensions.commands.Stash" text="Stash" icon="Icons.STASH"/>
             <reference ref="GitExtensions.Revert"/>
-            <action id="GitExtensions.ManageRemotes" class="ManageRemotes" text="Manage Remotes" icon="Icons.MANAGE_REMOTES"/>
-            <action id="GitExtensions.EditGitIgnore" class="EditGitIgnore" text="Edit .gitignore" icon="Icons.EDIT_GITIGNORE"/>
+            <action id="GitExtensions.ManageRemotes" class="gitextensions.commands.ManageRemotes" text="Manage Remotes" icon="Icons.MANAGE_REMOTES"/>
+            <action id="GitExtensions.EditGitIgnore" class="gitextensions.commands.EditGitIgnore" text="Edit .gitignore" icon="Icons.EDIT_GITIGNORE"/>
             <separator/>
-            <action id="GitExtensions.ApplyPatch" class="ApplyPatch" text="Apply Patch" icon="Icons.APPLY_PATCH"/>
-            <action id="GitExtensions.FormatPatch" class="FormatPatch" text="Format Patch" icon="Icons.FORMAT_PATCH"/>
+            <action id="GitExtensions.ApplyPatch" class="gitextensions.commands.ApplyPatch" text="Apply Patch" icon="Icons.APPLY_PATCH"/>
+            <action id="GitExtensions.FormatPatch" class="gitextensions.commands.FormatPatch" text="Format Patch" icon="Icons.FORMAT_PATCH"/>
             <separator/>
             <reference ref="GitExtensions.FileHistory"/>
-            <action id="GitExtensions.ViewChanges" class="ViewChanges" text="View Changes" icon="Icons.DIFF"/>
-            <action id="GitExtensions.Blame" class="Blame" text="Blame" icon="Icons.BLAME"/>
+            <action id="GitExtensions.ViewChanges" class="gitextensions.commands.ViewChanges" text="View Changes" icon="Icons.DIFF"/>
+            <action id="GitExtensions.Blame" class="gitextensions.commands.Blame" text="Blame" icon="Icons.BLAME"/>
             <separator/>
-            <action id="GitExtensions.Checkout" class="Checkout" text="Checkout Branch" icon="Icons.CHECKOUT"/>
-            <action id="GitExtensions.Branch" class="Branch" text="Create Branch" icon="Icons.CREATE_BRANCH"/>
-            <action id="GitExtensions.Merge" class="Merge" text="Merge" icon="Icons.MERGE"/>
-            <action id="GitExtensions.Rebase" class="Rebase" text="Rebase" icon="Icons.REBASE"/>
-            <action id="GitExtensions.SolveMergeConflicts" class="SolveMergeConflicts" text="Solve Merge Conflicts" icon="Icons.CONFLICT"/>
-            <action id="GitExtensions.CherryPick" class="CherryPick" text="Cherry Pick" icon="Icons.CHERRY"/>
+            <action id="GitExtensions.Checkout" class="gitextensions.commands.Checkout" text="Checkout Branch" icon="Icons.CHECKOUT"/>
+            <action id="GitExtensions.Branch" class="gitextensions.commands.Branch" text="Create Branch" icon="Icons.CREATE_BRANCH"/>
+            <action id="GitExtensions.Merge" class="gitextensions.commands.Merge" text="Merge" icon="Icons.MERGE"/>
+            <action id="GitExtensions.Rebase" class="gitextensions.commands.Rebase" text="Rebase" icon="Icons.REBASE"/>
+            <action id="GitExtensions.SolveMergeConflicts" class="gitextensions.commands.SolveMergeConflicts" text="Solve Merge Conflicts" icon="Icons.CONFLICT"/>
+            <action id="GitExtensions.CherryPick" class="gitextensions.commands.CherryPick" text="Cherry Pick" icon="Icons.CHERRY"/>
             <separator/>
-            <action id="GitExtensions.GitBash" class="GitBash" text="Git Bash" icon="Icons.GITBASH"/>
-            <action id="GitExtensions.Settings" class="Settings" text="Settings" icon="Icons.SETTINGS"/>
-            <action id="GitExtensions.About" class="About" text="About Git Extensions" icon="Icons.INFO"/>
+            <action id="GitExtensions.GitBash" class="gitextensions.commands.GitBash" text="Git Bash" icon="Icons.GITBASH"/>
+            <action id="GitExtensions.Settings" class="gitextensions.commands.Settings" text="Settings" icon="Icons.SETTINGS"/>
+            <action id="GitExtensions.About" class="gitextensions.commands.About" text="gitextensions.commands.About Git Extensions" icon="Icons.INFO"/>
             <add-to-group group-id="MainMenu" anchor="after" relative-to-action="ViewMenu"/>
         </group>
 

@@ -1,3 +1,5 @@
+package gitextensions;
+
 import com.intellij.openapi.components.ServiceManager;
 import org.jetbrains.annotations.Nullable;
 import utils.Registry;
