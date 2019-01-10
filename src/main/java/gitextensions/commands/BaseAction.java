@@ -17,7 +17,7 @@ import java.util.List;
 
 public abstract class BaseAction extends AnAction {
 
-    private static final String ERROR_MESSAGE = "This plugin requires Git Extensions to be installed. This application can be downloaded from http://gitextensions.github.io/";
+    private static final String ERROR_MESSAGE = "Installed GitExtensions application is not found. You can set path to the executable file manually (File | Settings... | GitExtensions) or download and install GitExtensions from http://gitextensions.github.io/";
 
     private String command;
 
