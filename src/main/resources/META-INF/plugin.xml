@@ -2,7 +2,7 @@
     <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
     <name>GitExtensions</name>
     <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
-    <version>0.2.2</version>
+    <version>0.3.0</version>
 
     <description><![CDATA[
     Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from the IDE
@@ -11,6 +11,10 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+          <li>0.3.0</li>
+          <ul>
+            <li>Added support for portable version of GitExtensions. <br>You can set the executable file path in the IDE settings menu</li>
+          </ul>
           <li>0.2.2</li>
           <ul>
             <li>Added dark theme icons</li>

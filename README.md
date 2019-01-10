@@ -1,6 +1,10 @@
-<p>Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from the IDE</p>
+<p>Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from IDEs based on the IntelliJ platform</p>
 
 <p>
+  <h4>0.3.0</h4>
+  <ul>
+      <li>Added support for portable version of GitExtensions. <br>You can set the executable file path in the IDE settings menu</li>
+  </ul>
   <h4>0.2.2</h4>
   <ul>
       <li>Added dark theme icons</li>

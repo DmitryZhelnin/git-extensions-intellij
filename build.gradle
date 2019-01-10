@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.dmitryzhelnin.intellij.plugin.git.extensions'
-version '0.2.2'
+version '0.3.0'
 
 sourceCompatibility = 1.8
 
