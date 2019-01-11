@@ -2,7 +2,7 @@
     <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
     <name>GitExtensions</name>
     <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
 
     <description><![CDATA[
     Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from the IDE
@@ -86,7 +86,7 @@
             <separator/>
             <action id="GitExtensions.GitBash" class="gitextensions.commands.GitBash" text="Git Bash" icon="Icons.GITBASH"/>
             <action id="GitExtensions.Settings" class="gitextensions.commands.Settings" text="Settings" icon="Icons.SETTINGS"/>
-            <action id="GitExtensions.About" class="gitextensions.commands.About" text="gitextensions.commands.About Git Extensions" icon="Icons.INFO"/>
+            <action id="GitExtensions.About" class="gitextensions.commands.About" text="About Git Extensions" icon="Icons.INFO"/>
             <add-to-group group-id="MainMenu" anchor="after" relative-to-action="ViewMenu"/>
         </group>
 
