@@ -11,6 +11,10 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+          <li>0.3.1</li>
+          <ul>
+            <li>Minor UI fix</li>
+          </ul>
           <li>0.3.0</li>
           <ul>
             <li>Added support for portable version of GitExtensions. <br>You can set the executable file path in the IDE settings menu</li>
