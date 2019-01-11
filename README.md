@@ -1,4 +1,4 @@
-Adds ability to work with [GitExtensions]("https://github.com/gitextensions/gitextensions) application from IDEs based on the IntelliJ platform
+Adds ability to work with [GitExtensions](https://github.com/gitextensions/gitextensions) application from IDEs based on the IntelliJ platform
 
 ## **Usage instructions**
 ### **Windows**
