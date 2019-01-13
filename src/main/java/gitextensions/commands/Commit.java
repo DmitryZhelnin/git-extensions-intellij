@@ -31,7 +31,7 @@ public class Commit extends BaseAction implements CustomComponentAction {
         String branchName = BranchNameService.getInstance().getBranchName(file);
         if (!Objects.equals(lastBranchName, branchName)) {
             Presentation presentation = e.getPresentation();
-            String text = Strings.isNullOrEmpty(branchName) ? "Commit" : String.format("Commit (%s)", branchName);
+            String text = Strings.isNullOrEmpty(branchName) ? "Commit" : String.format("Commit (%s)", branchName.replace("_", "__"));
             presentation.setText(text);
             lastBranchName = branchName;
         }
