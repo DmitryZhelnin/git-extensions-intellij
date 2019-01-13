@@ -29,7 +29,11 @@ public class Commit extends BaseAction implements CustomComponentAction, Setting
     @Override
     public void update(@NotNull AnActionEvent e) {
         if (!GitExtensionsService.getInstance().getSettings().isDisplayBranchName()) {
-            e.getPresentation().setText("Commit");
+            if (e.isFromActionToolbar()) {
+                e.getPresentation().setText("");
+            } else if (e.isFromContextMenu()){
+                e.getPresentation().setText("Commit");
+            }
             return;
         }
 
