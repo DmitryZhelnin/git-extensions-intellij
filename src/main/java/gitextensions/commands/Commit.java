@@ -7,12 +7,15 @@ import com.intellij.openapi.actionSystem.impl.ActionButtonWithText;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import gitextensions.BranchNameService;
+import gitextensions.GitExtensionsService;
+import gitextensions.GitExtensionsSettings;
+import gitextensions.SettingsListener;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.Objects;
 
-public class Commit extends BaseAction implements CustomComponentAction {
+public class Commit extends BaseAction implements CustomComponentAction, SettingsListener {
 
     private static final int BRANCH_CHECK_TIMEOUT = 1000;
     private String lastBranchName;
@@ -20,10 +23,16 @@ public class Commit extends BaseAction implements CustomComponentAction {
 
     public Commit() {
         super(Commands.COMMIT);
+        GitExtensionsService.getInstance().addSettingsListener(this);
     }
 
     @Override
     public void update(@NotNull AnActionEvent e) {
+        if (!GitExtensionsService.getInstance().getSettings().isDisplayBranchName()) {
+            e.getPresentation().setText("Commit");
+            return;
+        }
+
         VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
         if (file == null || System.currentTimeMillis() - lastCheckMillis < BRANCH_CHECK_TIMEOUT) {
             return;
@@ -48,5 +57,10 @@ public class Commit extends BaseAction implements CustomComponentAction {
     @Override
     public JComponent createCustomComponent(@NotNull Presentation presentation) {
         return new ActionButtonWithText(this, presentation, ActionPlaces.UNKNOWN, ActionToolbar.DEFAULT_MINIMUM_BUTTON_SIZE);
+    }
+
+    @Override
+    public void settingsChanged(GitExtensionsSettings settings) {
+        lastBranchName = "";
     }
 }

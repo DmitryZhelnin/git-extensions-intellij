@@ -2,7 +2,6 @@ package gitextensions.ui;
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.util.Comparing;
 import gitextensions.GitExtensionsService;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +33,7 @@ public class GitExtensionsSettingsConfigurable implements Configurable {
     @Override
     public boolean isModified() {
         return settingsPanel != null &&
-            !Comparing.equal(GitExtensionsService.getInstance().getExecutablePath(), settingsPanel.getExecutablePath());
+            !GitExtensionsService.getInstance().getSettings().equals(settingsPanel.getSettings());
     }
 
     @Override
