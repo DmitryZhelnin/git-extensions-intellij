@@ -40,7 +40,7 @@ public class GitExtensionsService {
 
     public void saveSettings(GitExtensionsSettings newSettings) {
         PropertiesComponent.getInstance().setValue(EXE_PATH, newSettings.getExecutablePath());
-        PropertiesComponent.getInstance().setValue(DISPLAY_BRANCH_NAME, newSettings.isDisplayBranchName());
+        PropertiesComponent.getInstance().setValue(DISPLAY_BRANCH_NAME, newSettings.isDisplayBranchName(), true);
         settings = newSettings;
         for (SettingsListener listener : listeners) {
             listener.settingsChanged(settings);
