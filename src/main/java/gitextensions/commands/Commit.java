@@ -23,9 +23,9 @@ public class Commit extends BaseAction implements CustomComponentAction {
     public void update(@NotNull AnActionEvent e) {
         if (!GitExtensionsService.getInstance().getSettings().isDisplayBranchName()) {
             if (e.isFromActionToolbar()) {
-                e.getPresentation().setText("");
+                e.getPresentation().setText("", false);
             } else if (e.isFromContextMenu()){
-                e.getPresentation().setText("Commit");
+                e.getPresentation().setText("Commit", false);
             }
             return;
         }
