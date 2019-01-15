@@ -5,25 +5,18 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.CustomComponentAction;
 import com.intellij.openapi.actionSystem.impl.ActionButtonWithText;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import gitextensions.BranchNameService;
 import gitextensions.GitExtensionsService;
-import gitextensions.GitExtensionsSettings;
-import gitextensions.SettingsListener;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.util.Objects;
 
-public class Commit extends BaseAction implements CustomComponentAction, SettingsListener {
-
-    private static final int BRANCH_CHECK_TIMEOUT = 1000;
-    private String lastBranchName;
-    private long lastCheckMillis;
+public class Commit extends BaseAction implements CustomComponentAction {
 
     public Commit() {
         super(Commands.COMMIT);
-        GitExtensionsService.getInstance().addSettingsListener(this);
     }
 
     @Override
@@ -38,17 +31,14 @@ public class Commit extends BaseAction implements CustomComponentAction, Setting
         }
 
         VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-        if (file == null || System.currentTimeMillis() - lastCheckMillis < BRANCH_CHECK_TIMEOUT) {
+        Project project = e.getData(PlatformDataKeys.PROJECT);
+        if (project == null || file == null) {
             return;
         }
-        String branchName = BranchNameService.getInstance().getBranchName(file);
-        if (!Objects.equals(lastBranchName, branchName)) {
-            Presentation presentation = e.getPresentation();
-            String text = Strings.isNullOrEmpty(branchName) ? "Commit" : String.format("Commit (%s)", branchName.replace("_", "__"));
-            presentation.setText(text);
-            lastBranchName = branchName;
-        }
-        lastCheckMillis = System.currentTimeMillis();
+        String branchName = BranchNameService.getInstance(project).getBranchName(file);
+        Presentation presentation = e.getPresentation();
+        String text = Strings.isNullOrEmpty(branchName) ? "Commit" : String.format("Commit (%s)", branchName);
+        presentation.setText(text, false);
     }
 
     @Override
@@ -63,8 +53,4 @@ public class Commit extends BaseAction implements CustomComponentAction, Setting
         return new ActionButtonWithText(this, presentation, ActionPlaces.UNKNOWN, ActionToolbar.DEFAULT_MINIMUM_BUTTON_SIZE);
     }
 
-    @Override
-    public void settingsChanged(GitExtensionsSettings settings) {
-        lastBranchName = "";
-    }
 }

@@ -46,7 +46,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <applicationService serviceImplementation="gitextensions.GitExtensionsService"/>
-        <applicationService serviceImplementation="gitextensions.BranchNameService"/>
+        <projectService serviceImplementation="gitextensions.BranchNameService"/>
         <applicationConfigurable instance="gitextensions.ui.GitExtensionsSettingsConfigurable"/>
     </extensions>
 
