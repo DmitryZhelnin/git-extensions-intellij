@@ -15,10 +15,14 @@ mono /home/user/GitExtensions/GitExtensions.exe $1 $2 $3
 and provide path to your script instead of GitExtensions.exe file via IDE settings menu *(File | Settings... | GitExtensions)*.
 
 ## **Changelog**
+#### 0.4.0
+* Display branch name on the Commit button for the file opened in the editor or item selected in the project view
+* Added "Display current branch name on the Commit button" settings item
+* Added "Maximum branch name length" settings item
 #### 0.3.1
 * Minor UI fix
 #### 0.3.0
-* Added support for portable version of GitExtensions.  
+* Added support for portable version of GitExtensions
 You can set the executable file path in the IDE settings menu
 #### 0.2.2
 * Added dark theme icons
