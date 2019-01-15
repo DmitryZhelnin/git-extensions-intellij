@@ -2,6 +2,7 @@ package gitextensions;
 
 import com.google.common.base.Strings;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -27,8 +28,8 @@ public class BranchNameService {
         gitHeadFileWatchSet = ConcurrentHashMap.newKeySet();
     }
 
-    public static BranchNameService getInstance() {
-        return ServiceManager.getService(BranchNameService.class);
+    public static BranchNameService getInstance(@NotNull Project project) {
+        return ServiceManager.getService(project, BranchNameService.class);
     }
 
     @Nullable

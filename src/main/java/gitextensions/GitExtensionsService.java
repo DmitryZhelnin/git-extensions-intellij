@@ -6,15 +6,11 @@ import com.intellij.openapi.components.ServiceManager;
 import org.jetbrains.annotations.Nullable;
 import utils.Registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GitExtensionsService {
 
     private static final String EXE_PATH = "GitExtensions.ExecutablePath";
     private static final String DISPLAY_BRANCH_NAME = "GitExtensions.DisplayBranchName";
 
-    private List<SettingsListener> listeners = new ArrayList<SettingsListener>();
     private GitExtensionsSettings settings;
 
     private GitExtensionsService() {
@@ -42,17 +38,6 @@ public class GitExtensionsService {
         PropertiesComponent.getInstance().setValue(EXE_PATH, newSettings.getExecutablePath());
         PropertiesComponent.getInstance().setValue(DISPLAY_BRANCH_NAME, newSettings.isDisplayBranchName(), true);
         settings = newSettings;
-        for (SettingsListener listener : listeners) {
-            listener.settingsChanged(settings);
-        }
-    }
-
-    public void addSettingsListener(SettingsListener listener) {
-        listeners.add(listener);
-    }
-
-    public void removeSettingsListener(SettingsListener listener) {
-        listeners.remove(listener);
     }
 
     @Nullable
