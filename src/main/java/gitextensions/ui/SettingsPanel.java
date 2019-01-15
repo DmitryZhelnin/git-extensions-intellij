@@ -5,7 +5,6 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.util.ui.JBUI;
 import gitextensions.GitExtensionsSettings;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,76 +16,72 @@ public class SettingsPanel {
     private JPanel mainPanel;
     private TextFieldWithBrowseButton browseComponent;
     private JCheckBox displayBranchName;
+    private JSpinner maxLengthSpinner;
 
     public SettingsPanel() {
         mainPanel = new JPanel(new BorderLayout());
 
         JPanel panel = new JPanel(new GridBagLayout());
 
-        GridBagConstraints c = new GridBagConstraints();
-
         JPanel browsePanel = getBrowsePanel();
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = 0;
-        c.anchor = GridBagConstraints.NORTH;
-        c.insets = JBUI.insets(MARGIN);
-        panel.add(browsePanel, c);
+        panel.add(browsePanel, getGridConstraints(0, 0, 1, 0));
 
         displayBranchName = new JCheckBox("Display current branch name on the Commit button");
         displayBranchName.setAlignmentY(Component.TOP_ALIGNMENT);
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = 0;
-        c.anchor = GridBagConstraints.NORTH;
-        c.insets = JBUI.insets(MARGIN);
-        panel.add(displayBranchName, c);
+        displayBranchName.addActionListener(e -> {
+            AbstractButton abstractButton = (AbstractButton) e.getSource();
+            boolean selected = abstractButton.getModel().isSelected();
+            maxLengthSpinner.setEnabled(selected);
+        });
+        panel.add(displayBranchName, getGridConstraints(0, 1, 1, 0));
+
+        JPanel maxLengthPanel = getMaxBranchNameLengthPanel();
+        panel.add(maxLengthPanel, getGridConstraints(0, 2, 1, 0));
 
         mainPanel.add(panel, BorderLayout.NORTH);
     }
 
-    @NotNull
     private JPanel getBrowsePanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setAlignmentY(Component.TOP_ALIGNMENT);
 
-        GridBagConstraints c = new GridBagConstraints();
-
         JLabel label = new JLabel("GitExtensions executable path:", SwingConstants.LEFT);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.fill = GridBagConstraints.VERTICAL;
-        c.weightx = 0;
-        c.weighty = 0;
-        c.anchor = GridBagConstraints.NORTH;
-        c.insets = JBUI.insets(MARGIN);
-        panel.add(label, c);
+        panel.add(label, getGridConstraints(0, 0, 0, 0));
 
         browseComponent = new TextFieldWithBrowseButton();
         FileChooserDescriptor descriptor = FileChooserDescriptorFactory.createSingleFileDescriptor("exe");
         browseComponent.addBrowseFolderListener(null, null, null, descriptor);
+        panel.add(browseComponent, getGridConstraints(1, 0, 1, 0));
 
-        c.gridx = 1;
-        c.gridy = 0;
+        return panel;
+    }
+
+    private JPanel getMaxBranchNameLengthPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setAlignmentY(Component.TOP_ALIGNMENT);
+
+        JLabel label = new JLabel("Maximum branch name length, symbols:", SwingConstants.LEFT);
+        panel.add(label, getGridConstraints(0, 0, 0, 0));
+
+        SpinnerModel model = new SpinnerNumberModel(27, 5, 256, 1);
+        maxLengthSpinner = new JSpinner(model);
+        panel.add(maxLengthSpinner, getGridConstraints(1, 0, 1, 0));
+
+        return panel;
+    }
+
+    private GridBagConstraints getGridConstraints(int x, int y, double weightX, double weightY) {
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = x;
+        c.gridy = y;
         c.gridwidth = 1;
         c.gridheight = 1;
         c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = 0;
-        c.anchor = GridBagConstraints.NORTH;
+        c.weightx = weightX;
+        c.weighty = weightY;
+        c.anchor = GridBagConstraints.NORTHWEST;
         c.insets = JBUI.insets(MARGIN);
-        panel.add(browseComponent, c);
-        return panel;
+        return c;
     }
 
     public JPanel getPanel() {
@@ -96,6 +91,7 @@ public class SettingsPanel {
     public void init(GitExtensionsSettings settings) {
         browseComponent.setText(settings.getExecutablePath());
         displayBranchName.setSelected(settings.isDisplayBranchName());
+        maxLengthSpinner.setValue(settings.getMaxBranchNameLength());
     }
 
     public String getExecutablePath() {
@@ -106,10 +102,15 @@ public class SettingsPanel {
         return displayBranchName.isSelected();
     }
 
+    public int getMaxBranchNameLength() {
+        return (int) maxLengthSpinner.getValue();
+    }
+
     public GitExtensionsSettings getSettings() {
         GitExtensionsSettings settings = new GitExtensionsSettings();
         settings.setExecutablePath(getExecutablePath());
         settings.setDisplayBranchName(getDisplayBranchName());
+        settings.setMaxBranchNameLength(getMaxBranchNameLength());
         return settings;
     }
 }

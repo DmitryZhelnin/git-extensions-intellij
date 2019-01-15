@@ -9,11 +9,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import gitextensions.BranchNameService;
 import gitextensions.GitExtensionsService;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public class Commit extends BaseAction implements CustomComponentAction {
+
+    private GitExtensionsService GitExtensions = GitExtensionsService.getInstance();
 
     public Commit() {
         super(Commands.COMMIT);
@@ -21,7 +24,7 @@ public class Commit extends BaseAction implements CustomComponentAction {
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        if (!GitExtensionsService.getInstance().getSettings().isDisplayBranchName()) {
+        if (!GitExtensions.getSettings().isDisplayBranchName()) {
             if (e.isFromActionToolbar()) {
                 e.getPresentation().setText("", false);
             } else if (e.isFromContextMenu()){
@@ -35,9 +38,16 @@ public class Commit extends BaseAction implements CustomComponentAction {
         if (project == null || file == null) {
             return;
         }
+
         String branchName = BranchNameService.getInstance(project).getBranchName(file);
         Presentation presentation = e.getPresentation();
-        String text = Strings.isNullOrEmpty(branchName) ? "Commit" : String.format("Commit (%s)", branchName);
+        String text;
+        if (Strings.isNullOrEmpty(branchName)) {
+            text = "Commit";
+        } else {
+            branchName = StringUtils.abbreviate(branchName, GitExtensions.getSettings().getMaxBranchNameLength());
+            text = String.format("Commit (%s)", branchName);
+        }
         presentation.setText(text, false);
     }
 
