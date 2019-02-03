@@ -15,6 +15,8 @@ mono /home/user/GitExtensions/GitExtensions.exe $1 $2 $3
 and provide path to your script instead of GitExtensions.exe file via IDE settings menu *(File | Settings... | GitExtensions)*.
 
 ## **Changelog**
+#### 0.4.1
+* Update supported versions of IntelliJ platform
 #### 0.4.0
 * Display branch name on the Commit button for the file opened in the editor or item selected in the project view
 * Added "Display current branch name on the Commit button" settings item

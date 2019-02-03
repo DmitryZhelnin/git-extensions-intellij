@@ -2,7 +2,7 @@
     <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
     <name>GitExtensions</name>
     <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
 
     <description><![CDATA[
     Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from IDEs based on the IntelliJ platform
@@ -11,6 +11,10 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+          <li>0.4.1</li>
+          <ul>
+            <li>Update supported versions of IntelliJ platform</li>
+          </ul>
           <li>0.4.0</li>
           <ul>
             <li>Display branch name on the Commit button for the file opened in the editor or item selected in the project view</li>
@@ -46,6 +50,8 @@
       </p>
       ]]>
     </change-notes>
+
+    <idea-version since-build="181.0"/>
 
     <depends>com.intellij.modules.lang</depends>
 
