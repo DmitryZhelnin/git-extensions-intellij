@@ -1,19 +1,24 @@
 package gitextensions;
 
 import com.google.common.base.Strings;
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.*;
+import com.intellij.openapi.vfs.newvfs.BulkFileListener;
+import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BranchNameService {
+@Service
+public final class BranchNameService {
 
     private static final String GIT_DIR_PREFIX = "gitdir:";
     private static final String REF_PREFIX = "ref:";
@@ -21,9 +26,11 @@ public class BranchNameService {
 
     private final Map<String, String> fileName2BranchName;
     private final Set<String> gitHeadFileWatchSet;
+    private final Project myProject;
     private String lastReturnedBranchName;
 
-    private BranchNameService() {
+    private BranchNameService(Project project) {
+        myProject = project;
         fileName2BranchName = new ConcurrentHashMap<>(512);
         gitHeadFileWatchSet = ConcurrentHashMap.newKeySet();
     }
@@ -105,7 +112,7 @@ public class BranchNameService {
 
     private VirtualFile checkGitWorkTree(VirtualFile gitFile) {
         try {
-            String content = new String(gitFile.contentsToByteArray(), Charset.forName("UTF-8"));
+            String content = new String(gitFile.contentsToByteArray(), StandardCharsets.UTF_8);
             if (!content.contains(GIT_DIR_PREFIX)) {
                 return null;
             }
@@ -128,7 +135,7 @@ public class BranchNameService {
     private String readHeadFile(VirtualFile headFile) {
         if (headFile != null) {
             try {
-                String content = new String(headFile.contentsToByteArray(), Charset.forName("UTF-8"));
+                String content = new String(headFile.contentsToByteArray(), StandardCharsets.UTF_8);
                 if (!content.contains(REF_PREFIX)) {
                     return null;
                 }
@@ -146,11 +153,14 @@ public class BranchNameService {
     private void registerFileChangedListener(final String gitHeadFilePath) {
         if (!gitHeadFileWatchSet.contains(gitHeadFilePath)) {
             gitHeadFileWatchSet.add(gitHeadFilePath);
-            VirtualFileManager.getInstance().addVirtualFileListener(new VirtualFileListener() {
+            myProject.getMessageBus().connect().subscribe(VirtualFileManager.VFS_CHANGES, new BulkFileListener() {
                 @Override
-                public void contentsChanged(@NotNull VirtualFileEvent event) {
-                    if (gitHeadFilePath.equals(event.getFile().getCanonicalPath())) {
-                        invalidateFilesCache();
+                public void after(@NotNull List<? extends VFileEvent> events) {
+                    for (VFileEvent event : events) {
+                        VirtualFile file = event.getFile();
+                        if (file != null && gitHeadFilePath.equals(file.getCanonicalPath())) {
+                            invalidateFilesCache();
+                        }
                     }
                 }
             });

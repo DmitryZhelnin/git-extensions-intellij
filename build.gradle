@@ -13,6 +13,6 @@ dependencies {
 }
 
 intellij {
-    intellij.version '2019.1'
+    intellij.version '2019.3'
     intellij.updateSinceUntilBuild false
 }

@@ -51,14 +51,13 @@
       ]]>
     </change-notes>
 
-    <idea-version since-build="192.0"/>
+    <idea-version since-build="193.0"/>
 
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <applicationService serviceImplementation="gitextensions.GitExtensionsService"/>
-        <projectService serviceImplementation="gitextensions.BranchNameService"/>
         <applicationConfigurable instance="gitextensions.ui.GitExtensionsSettingsConfigurable"/>
     </extensions>
 
