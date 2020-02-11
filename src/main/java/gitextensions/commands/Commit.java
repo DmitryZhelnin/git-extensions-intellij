@@ -61,7 +61,7 @@ public class Commit extends BaseAction implements CustomComponentAction {
 
     @NotNull
     @Override
-    public JComponent createCustomComponent(@NotNull Presentation presentation) {
+    public JComponent createCustomComponent(@NotNull Presentation presentation, @NotNull String place) {
         return new ActionButtonWithText(this, presentation, ActionPlaces.UNKNOWN, ActionToolbar.DEFAULT_MINIMUM_BUTTON_SIZE);
     }
 
