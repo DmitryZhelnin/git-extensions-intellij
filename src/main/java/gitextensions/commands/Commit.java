@@ -27,7 +27,7 @@ public class Commit extends BaseAction implements CustomComponentAction {
         if (!GitExtensions.getSettings().isDisplayBranchName()) {
             if (e.isFromActionToolbar()) {
                 e.getPresentation().setText("", false);
-            } else if (e.isFromContextMenu()){
+            } else if (ActionPlaces.isMainMenuOrActionSearch(e.getPlace())){
                 e.getPresentation().setText("Commit", false);
             } else {
                 e.getPresentation().setText("", false); // in 2018.1.1 both are false
