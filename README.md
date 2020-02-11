@@ -15,6 +15,9 @@ mono /home/user/GitExtensions/GitExtensions.exe $1 $2 $3
 and provide path to your script instead of GitExtensions.exe file via IDE settings menu *(File | Settings... | GitExtensions)*.
 
 ## **Changelog**
+#### 0.4.2
+* Fix usages of deprecated API
+* Minimum supported version of IntelliJ platform is 193.0
 #### 0.4.1
 * Update supported versions of IntelliJ platform
 #### 0.4.0

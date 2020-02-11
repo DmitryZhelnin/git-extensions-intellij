@@ -11,6 +11,11 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+          <li>0.4.2</li>
+          <ul>
+            <li>Fix usages of deprecated API</li>
+            <li>Minimum supported version of IntelliJ platform is 193.0</li>
+          </ul>
           <li>0.4.1</li>
           <ul>
             <li>Update supported versions of IntelliJ platform</li>
