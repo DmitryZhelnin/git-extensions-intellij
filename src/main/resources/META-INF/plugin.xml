@@ -2,7 +2,7 @@
     <id>com.dmitryzhelnin.intellij.plugin.gitextensions</id>
     <name>GitExtensions</name>
     <vendor url="https://github.com/DmitryZhelnin/git-extensions-intellij">Dmitry Zhelnin</vendor>
-    <version>0.4.3</version>
+    <version>0.4.4</version>
 
     <description><![CDATA[
     Adds ability to work with <a href="https://github.com/gitextensions/gitextensions">GitExtensions</a> application from IDEs based on the IntelliJ platform
@@ -11,6 +11,10 @@
     <change-notes><![CDATA[
       <p>
         <ul>
+          <li>0.4.4</li>
+          <ul>
+            <li>Fix usages of deprecated API</li>
+          </ul>
           <li>0.4.3</li>
           <ul>
             <li>Fix usages of deprecated API</li>
