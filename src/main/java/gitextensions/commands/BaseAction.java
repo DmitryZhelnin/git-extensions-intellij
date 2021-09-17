@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import gitextensions.GitExtensionsService;
@@ -32,7 +33,8 @@ public abstract class BaseAction extends AnAction {
             String fileName = getFileName(file);
 
             if (fileName != null) {
-                String path = GitExtensionsService.getInstance().getSettings().getExecutablePath();
+                GitExtensionsService service = ApplicationManager.getApplication().getService(GitExtensionsService.class);
+                String path = service.getSettings().getExecutablePath();
                 if (Strings.isNullOrEmpty(path)) {
                     Messages.showMessageDialog(ERROR_MESSAGE, "Error", Messages.getErrorIcon());
                     return;

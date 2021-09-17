@@ -31,10 +31,6 @@ public class GitExtensionsService {
         settings.setMaxBranchNameLength(maxBranchNameLength);
     }
 
-    public static GitExtensionsService getInstance() {
-        return ServiceManager.getService(GitExtensionsService.class);
-    }
-
     public GitExtensionsSettings getSettings() {
         return settings;
     }

@@ -1,5 +1,6 @@
 package gitextensions.ui;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import gitextensions.GitExtensionsService;
@@ -11,6 +12,7 @@ import javax.swing.*;
 public class GitExtensionsSettingsConfigurable implements Configurable {
 
     private static final String NAME = "GitExtensions";
+    private final GitExtensionsService GitExtensions = ApplicationManager.getApplication().getService(GitExtensionsService.class);
 
     private SettingsPanel settingsPanel;
 
@@ -26,24 +28,24 @@ public class GitExtensionsSettingsConfigurable implements Configurable {
         if (settingsPanel == null) {
             settingsPanel = new SettingsPanel();
         }
-        settingsPanel.init(GitExtensionsService.getInstance().getSettings());
+        settingsPanel.init(GitExtensions.getSettings());
         return settingsPanel.getPanel();
     }
 
     @Override
     public boolean isModified() {
         return settingsPanel != null &&
-            !GitExtensionsService.getInstance().getSettings().equals(settingsPanel.getSettings());
+            !GitExtensions.getSettings().equals(settingsPanel.getSettings());
     }
 
     @Override
     public void apply() throws ConfigurationException {
-        GitExtensionsService.getInstance().saveSettings(settingsPanel.getSettings());
+        GitExtensions.saveSettings(settingsPanel.getSettings());
     }
 
     @Override
     public void reset() {
-        settingsPanel.init(GitExtensionsService.getInstance().getSettings());
+        settingsPanel.init(GitExtensions.getSettings());
     }
 }
 

@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.CustomComponentAction;
 import com.intellij.openapi.actionSystem.impl.ActionButtonWithText;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -16,7 +17,7 @@ import javax.swing.*;
 
 public class Commit extends BaseAction implements CustomComponentAction {
 
-    private GitExtensionsService GitExtensions = GitExtensionsService.getInstance();
+    private final GitExtensionsService GitExtensions = ApplicationManager.getApplication().getService(GitExtensionsService.class);
 
     public Commit() {
         super(Commands.COMMIT);
@@ -41,7 +42,7 @@ public class Commit extends BaseAction implements CustomComponentAction {
             return;
         }
 
-        String branchName = BranchNameService.getInstance(project).getBranchName(file);
+        String branchName = project.getService(BranchNameService.class).getBranchName(file);
         Presentation presentation = e.getPresentation();
         String text;
         if (Strings.isNullOrEmpty(branchName)) {

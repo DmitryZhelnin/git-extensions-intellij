@@ -35,10 +35,6 @@ public final class BranchNameService {
         gitHeadFileWatchSet = ConcurrentHashMap.newKeySet();
     }
 
-    public static BranchNameService getInstance(@NotNull Project project) {
-        return ServiceManager.getService(project, BranchNameService.class);
-    }
-
     @Nullable
     public String getBranchName(VirtualFile file) {
         String fileName = file.getCanonicalPath();
