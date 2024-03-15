@@ -1,9 +1,7 @@
 package gitextensions.commands;
 
 import com.google.common.base.Strings;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -27,10 +25,14 @@ public abstract class BaseAction extends AnAction {
     }
 
     @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT; //super.getActionUpdateThread();
+    }
+
+    @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         try {
-            VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-            String fileName = getFileName(file);
+            String fileName = getFileNameFromEvent(e);
 
             if (fileName != null) {
                 GitExtensionsService service = ApplicationManager.getApplication().getService(GitExtensionsService.class);
@@ -55,6 +57,12 @@ public abstract class BaseAction extends AnAction {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Nullable
+    protected String getFileNameFromEvent(@NotNull AnActionEvent e) {
+        VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+        return getFileName(file);
     }
 
     protected String getFileName(@Nullable VirtualFile file) {

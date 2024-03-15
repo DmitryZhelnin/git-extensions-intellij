@@ -1,18 +1,21 @@
 plugins {
-    id 'java'
-    id 'org.jetbrains.intellij' version '0.4.1'
+    id "org.jetbrains.intellij" version "1.17.2"
 }
 
 group 'com.dmitryzhelnin.intellij.plugin.git.extensions'
-version '0.4.4'
+version '0.4.5-az'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 17
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
 
 intellij {
-    intellij.version '2019.3'
-    intellij.updateSinceUntilBuild false
+    version = '2022.3'
+    updateSinceUntilBuild  = false
 }
