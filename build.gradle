@@ -5,7 +5,7 @@ plugins {
 group 'com.dmitryzhelnin.intellij.plugin.git.extensions'
 version '0.4.5-az'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 17
 
 repositories {
     mavenCentral()
@@ -16,6 +16,6 @@ dependencies {
 }
 
 intellij {
-    version = '2019.3'
+    version = '2022.3'
     updateSinceUntilBuild  = false
 }
